@@ -1,0 +1,37 @@
+
+services:
+  account_management:
+    build:
+      context: ./account_management
+      dockerfile: Dockerfile
+    container_name: account_management
+    restart: always
+    environment:
+      PORT: 5000
+      DB_HOST: localhost
+      DB_NAME: banking
+      DB_USER: postgres
+      DB_PASSWORD: password
+    ports:
+      - "5000:5000"
+    networks:
+      - banking-network
+
+  transaction_service:
+    build:
+      context: ./transaction_service
+      dockerfile: Dockerfile
+    container_name: transaction_service
+    restart: always
+    environment:
+      PORT: 5001
+      MONGO_URI: mongodb://localhost:27017/banking
+      ACCOUNT_SERVICE_URL: http://localhost:5000/api/accounts
+    ports:
+      - "5001:5001"
+    networks:
+      - banking-network
+
+networks:
+  banking-network:
+    driver: bridge

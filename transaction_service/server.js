@@ -5,6 +5,7 @@ const connectDB = require("./src/config/mongo_connect");
 const transactionRoutes = require("./src/routes/transactionRoutes");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const logger = require("./src/utils/logger");
 
 dotenv.config();
 connectDB();
@@ -35,4 +36,4 @@ app.post("/register", async (req, res) => {
 app.use("/api/transactions", transactionRoutes);
 
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Transaction Service running on port ${PORT}`));
+app.listen(PORT, () => logger.info(`Transaction Service running on port ${PORT}`));

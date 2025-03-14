@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
+const logger = require("../utils/logger");
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
@@ -8,11 +9,12 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 });
 
 const connectDB = async () => {
+  logger.info("Connecting to PostgreSQL::");
   try {
     await sequelize.authenticate();
-    console.log("PostgreSQL Connected");
+    logger.info("PostgreSQL Connected");
   } catch (error) {
-    console.error("Database Connection Failed:", error);
+    logger.error("Database Connection Failed:", error);
     process.exit(1);
   }
 };

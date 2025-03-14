@@ -8,8 +8,8 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:password@db:5432/banking
 
-  transaction-service:
-    image: mydockerhubuser/transaction-service:latest
+  transaction_service:
+    image: mydockerhubuser/transaction_service:latest
     ports:
       - "5001:5001"
     environment:

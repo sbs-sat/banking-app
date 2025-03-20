@@ -50,23 +50,6 @@ exports.getAllUserAccounts = async (req, res) => {
   }
 };
 
-// Update Account Balance
-// exports.updateBalance = async (req, res) => {
-//   try {
-//     const { amount } = req.body;
-//     const account = await Account.findByPk(req.params.id);
-
-//     if (!account) return res.status(404).json({ message: "Account not found" });
-
-//     account.balance += amount;
-//     await account.save();
-
-//     res.json({ success: true, data: account });
-//   } catch (error) {
-//     res.status(500).json({ success: false, error: error.message });
-//   }
-// };
-
 // Update account balance
 exports.updateBalance = async (req, res) => {
   logger.info("Updating balance for account: "+req.body.account_id);
@@ -85,7 +68,7 @@ exports.updateBalance = async (req, res) => {
     } else if (transaction_type === "DEPOSIT") {
       account.balance += amount;
     }
-
+    
     await account.save();
 
     // If it's a transfer, update recipient account

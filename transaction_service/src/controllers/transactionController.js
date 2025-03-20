@@ -7,7 +7,7 @@ const ACCOUNT_SERVICE_URL = process.env.ACCOUNT_SERVICE_URL || "http://localhost
 
 // Create a new transaction
 exports.createTransaction = async (req, res) => {
-  logger.info("New "+req.body.transaction_type+"transaction for account: "+req.body.account_id);
+  logger.info("New "+req.body.transaction_type+" transaction for account: "+req.body.account_id);
   try {
     const { account_id, transaction_type, amount, recipient_account_id } = req.body;
 
@@ -50,6 +50,7 @@ exports.createTransaction = async (req, res) => {
     }
 
   } catch (error) {
+    logger.info("Error occurred ::: "+error);
     res.status(500).json({ success: false, error: error.message });
   }
 };

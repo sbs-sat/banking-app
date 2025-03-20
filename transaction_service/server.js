@@ -35,5 +35,7 @@ app.post("/register", async (req, res) => {
 
 app.use("/api/transactions", transactionRoutes);
 
+module.exports = { app };
+
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => logger.info(`Transaction Service running on port ${PORT}`));
